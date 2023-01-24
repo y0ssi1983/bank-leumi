@@ -9,7 +9,12 @@ pipeline {
         }
         stage("testing") {
             steps {
-                sh 'terraform plan'
+                withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+                    sh """
+                    terraform init
+                    terraform plan
+                    """
+                }
             }
         }
     }
