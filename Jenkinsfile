@@ -7,5 +7,10 @@ pipeline {
                 checkout scm
             }
         }
+        stage("testing") {
+            steps {
+                sh 'terraform plan'
+            }
+        }
     }
 }
