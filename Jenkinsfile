@@ -7,7 +7,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage("testing") {
+        stage('build') {
             steps {
                 script {
                     sh """
@@ -15,6 +15,13 @@ pipeline {
                     terraform plan
                     terraform apply -auto-approve
                     """
+                }
+            }
+        }
+        stage("testing") {
+            steps {
+                script {
+                    sh './test.sh'
                 }
             }
         }
