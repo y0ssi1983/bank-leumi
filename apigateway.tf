@@ -1,3 +1,4 @@
+#Create API-Gateway
 resource "aws_apigatewayv2_api" "lambda" {
   name          = "serverless-lambda-apigw"
   protocol_type = "HTTP"
