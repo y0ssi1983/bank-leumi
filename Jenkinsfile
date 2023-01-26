@@ -21,7 +21,7 @@ pipeline {
         stage("testing") {
             steps {
                 script {
-                    TEST=sh (script: "./test", returnStdout: true).trim()
+                    TEST=sh (script: "./test.sh", returnStdout: true).trim()
                     echo"${TEST}"
                 }
             }
