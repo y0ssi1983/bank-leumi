@@ -10,6 +10,7 @@ terraform {
     }
   }
 }
+
 provider "aws" {
   region = var.aws_region
   default_tags {
@@ -19,6 +20,8 @@ provider "aws" {
     }
   }
 }
+
+# Create a new S3 bucket
 resource "aws_s3_bucket" "lambda-leumi" {
   bucket = "lambda-leumi"
   tags = {
@@ -26,6 +29,7 @@ resource "aws_s3_bucket" "lambda-leumi" {
   }
 }
 
+# Create for the bucket Access Control List (ACL)
 resource "aws_s3_bucket_acl" "bucket_acl" {
   bucket = aws_s3_bucket.lambda-leumi.id
   acl    = "private"

@@ -30,7 +30,6 @@ pipeline {
     }
     post {
         success {
-            cleanWs()
             mail (to: 'mz.yosi.dev@gmail.com',
                 subject: "Job '${env.JOB_NAME}' (${env.BUILD_NUMBER}) success.",
                 body: "Please visit ${env.BUILD_URL} for further information.",

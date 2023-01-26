@@ -1,14 +1,16 @@
-#Create API-Gateway
+# Create API-Gateway
 resource "aws_apigatewayv2_api" "lambda" {
   name          = "serverless-lambda-apigw"
   protocol_type = "HTTP"
 }
 
+# Use a single stage but can have more stages like "Test, Prod, Stagging"
 resource "aws_apigatewayv2_stage" "lambda" {
   api_id = aws_apigatewayv2_api.lambda.id
   name   = "serverless-lambda-stage"
 }
 
+# Configure the API to use Lambda function
 resource "aws_apigatewayv2_integration" "hello_bank" {
   api_id                    = aws_apigatewayv2_api.lambda.id
   integration_uri           = aws_lambda_function.lambda_hello.invoke_arn
@@ -16,6 +18,7 @@ resource "aws_apigatewayv2_integration" "hello_bank" {
   integration_method        = "POST"
 }
 
+# Maps the HTTP request to a target
 resource "aws_apigatewayv2_route" "hello_bank" {
   api_id = aws_apigatewayv2_api.lambda.id
 
@@ -23,6 +26,7 @@ resource "aws_apigatewayv2_route" "hello_bank" {
   target    = "integrations/${aws_apigatewayv2_integration.hello_bank.id}"
 }
 
+# Give the API permission to invoke Lambda function
 resource "aws_lambda_permission" "api_gw" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
