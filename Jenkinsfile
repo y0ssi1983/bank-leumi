@@ -27,4 +27,13 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            sh 'terraform destroy -auto-approve'
+            cleanWs()
+        }
+        failure {
+            echo "failed"
+        }
+    }
 }
