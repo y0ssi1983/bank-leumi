@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TEST=$(curl "$(terraform output -raw base_url)/hello" | grep -c "Hi")
+TEST=$(curl "$(terraform output -raw base_url)/hello" | grep -c "Hello")
 
 if [ $TEST -eq "1" ]
 then
