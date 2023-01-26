@@ -9,4 +9,5 @@ then
 else
     echo "###### TESTING ######"
     echo "test failed"
+    exit 1
 fi
