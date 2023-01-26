@@ -31,9 +31,17 @@ pipeline {
         success {
             sh 'terraform destroy -auto-approve'
             cleanWs()
+            mail (to: 'mz.yosi.dev@gmail.com',
+                subject: "Job '${env.JOB_NAME}' (${env.BUILD_NUMBER}) success.",
+                body: "Please visit ${env.BUILD_URL} for further information.",
+            );
         }
         failure {
             echo "failed"
+            mail (to: 'mz.yosi.dev@gmail.com',
+                subject: "Job '${env.JOB_NAME}' (${env.BUILD_NUMBER}) failed.",
+                body: "Please visit ${env.BUILD_URL} for further information.",
+            );
         }
     }
 }
