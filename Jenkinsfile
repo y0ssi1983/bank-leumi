@@ -21,7 +21,10 @@ pipeline {
         stage("testing") {
             steps {
                 script {
-                    sh './test.sh'
+                    sh """
+                    sleep 5
+                    ./test.sh
+                    """
                 }
             }
         }
